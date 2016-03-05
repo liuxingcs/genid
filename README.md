@@ -42,10 +42,13 @@ func main() {
 
     // Create a new snowflake compatible minter with a worker id, these *must* be unique.
     v, err := snowflake.New(100)
-
-    for i := 0; i < 10; i++ {
-        id, err := v.Mint()
-        fmt.Println(id)
+    if err == nil {
+	    for i := 0; i < 10; i++ {
+	        id, err := v.Mint()
+	        if err == nil {
+	        fmt.Println(id)
+	        }
+	    }
     }
 }
 ```
@@ -88,13 +91,15 @@ func main() {
 	// Using mac address as worker id
 	mac := "80:36:bc:db:64:16"
 	workerId, err := util.MacAddressToWorkerId(mac)
-
-    // Create a new bigflake minter with a worker id
-    m, err := bigflake.New(workerId)
-
-    for i := 0; i < 10; i++ {
-        id, err := m.Mint()
-        fmt.Println(id)
+       if err == nil {
+	    // Create a new bigflake minter with a worker id
+	    m, err := bigflake.New(workerId)
+	    if err == nil {
+		    for i := 0; i < 10; i++ {
+		        id, err := m.Mint()
+		        fmt.Println(id)
+		    }
+	    }
     }
 }
 ```
